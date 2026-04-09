@@ -231,6 +231,6 @@ QR-Code mit **Expo Go** scannen. Bei Netzwerkproblemen: `--tunnel` ergänzen.
 
 ## <a id="autor"></a>👨‍💻 Autor
 
-Eigenständig entwickelt als praxiserprobte Lösung für einen realen Wahlkampf-Use-Case — mit aktivem Stakeholder-Involvement während der Entwicklung.
+**Patrick Neumann**
 
-GitHub: [github.com/Codenix-1349](https://github.com/Codenix-1349)
+Eigenständig entwickelt als praxiserprobte Lösung für einen realen Wahlkampf-Use-Case — mit aktivem Stakeholder-Involvement während der Entwicklung.
