@@ -136,14 +136,14 @@ Screens (UI)  →  Custom Hooks (Logik)  →  AsyncStorage / Firebase
 
 ```
 src/
-├── components/     # Reine UI-Komponenten (ItemCard, Header, Modals)
-├── hooks/          # Gesamte Business-Logik
-│   ├── useStorage  # Persistenz-Layer (AsyncStorage)
-│   ├── useCapture  # Kamera + GPS + Geocoding-Workflow
-│   └── useExport   # PDF & CSV-Generierung + Smart-Sharing
-├── screens/        # Screen-Layout (Main, Settings)
-├── services/       # Firebase-Konfiguration (Cloud-Sync ready)
-└── utils/          # Formatter, CSV-Helfer, Navigation
+├── components/     # Wiederverwendbare UI-Komponenten
+├── hooks/          # Gekapselte Business-Logik
+│   ├── useStorage  # Lokale Datenhaltung
+│   ├── useCapture  # Native Device-Integration
+│   └── useExport   # Dokumenten-Export & Sharing
+├── screens/        # Screen-Komposition
+├── services/       # Externe Service-Anbindung
+└── utils/          # Hilfsmodule
 ```
 
 **Architekturprinzipien:**
