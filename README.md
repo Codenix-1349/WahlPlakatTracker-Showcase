@@ -30,7 +30,7 @@ Offline-fähige Feldapp für Wahlkampfteams · *React Native · Expo · Firebase
 <table>
   <tr>
     <td align="center" width="50%">
-      <img src="https://github.com/user-attachments/assets/2d7ee158-071e-40b5-9471-65a745e362f1"
+      <img src="https://github.com/user-attachments/assets/a2292185-534e-41f6-a2c6-a8667c8e2504"
            width="300" alt="Eintrags-Liste" /><br/>
       <sub><b>Erfasste Plakate mit Status-Anzeige</b></sub>
     </td>
@@ -48,8 +48,6 @@ Offline-fähige Feldapp für Wahlkampfteams · *React Native · Expo · Firebase
     </td>
   </tr>
 </table>
-
-![WahlPLakatFinder_Liste](https://github.com/user-attachments/assets/a2292185-534e-41f6-a2c6-a8667c8e2504)
 
 ---
 
@@ -76,27 +74,25 @@ Das Projekt legt besonderen Wert auf:
 
 ## <a id="app-fluss-im-detail"></a>🔄 App-Fluss im Detail
 
-### 📋 Seite der Wahlkampfleitung
-
-**1️⃣ Liste anlegen** — Name vergeben, los geht's
-
-**2️⃣ Plakate erfassen** — Ein Tap öffnet die Kamera; GPS läuft im Hintergrund
-
-**3️⃣ Status pflegen** — Jedes Plakat als OK oder Verloren markieren, Kommentar hinzufügen
-
-**4️⃣ Bericht versenden** — PDF oder Excel generieren und per Mail / WhatsApp teilen
-
----
-
 ### 🗳 Seite der Feldeinsatz-Teams
 
 **1️⃣ App starten** — Keine Registrierung, keine Anmeldung nötig
 
-**2️⃣ Foto machen** — Kamera öffnet sich sofort, Adresse wird automatisch erkannt
+**2️⃣ Plakate erfassen** — Ein Tap öffnet die Kamera; GPS + Adresse werden automatisch erkannt
 
-**3️⃣ Liste prüfen** — Plakatstatus auf einen Blick, Kommentare ergänzen
+**3️⃣ Status pflegen** — Jedes Plakat als OK oder Verloren markieren, Kommentar hinzufügen
 
-**4️⃣ Senden** — Fertige Liste direkt per Knopfdruck verschicken
+**4️⃣ Bericht versenden** — Fertige Liste als PDF oder Excel exportieren und per Mail / WhatsApp teilen
+
+---
+
+### 📋 Seite der Wahlkampfleitung
+
+**1️⃣ Teams einteilen** — Gebiete und Einsätze werden vorab außerhalb der App organisiert
+
+**2️⃣ Bericht empfangen** — Das Feldteam schickt die exportierte Liste per Mail oder WhatsApp
+
+**3️⃣ Auswerten** — PDF oder Excel direkt öffnen — Standorte, Status und Kommentare auf einen Blick
 
 ---
 
@@ -206,6 +202,7 @@ QR-Code mit **Expo Go** scannen. Bei Netzwerkproblemen: `--tunnel` ergänzen.
 - [x] Kommentar-System
 - [x] PDF & CSV-Export mit Smart-Sharing
 - [x] Persistente lokale Datenspeicherung
+- [x] Maps-Deep-Link pro Eintrag — öffnet Standort direkt in Apple Maps / Google Maps (plattformabhängig mit Web-Fallback)
 - [x] Sauberes, feldtaugliches UI
 
 ### 🔄 v1.5 — Cloud-Sync & Teams *(in Entwicklung)*
@@ -215,7 +212,8 @@ QR-Code mit **Expo Go** scannen. Bei Netzwerkproblemen: `--tunnel` ergänzen.
 - [ ] Firebase Storage für Foto-Uploads
 
 ### 🚀 v2.0 — Erweiterte Features *(geplant)*
-- [ ] Kartenansicht mit Plakat-Pins
+- [ ] **Navigationsroute zum Abhängen** — optimierte Fahrroute durch alle Plakatstandorte als Wegpunkte, sodass Teams die Strecke nur noch abfahren müssen
+- [ ] In-App Kartenübersicht mit allen Plakat-Pins auf einen Blick
 - [ ] Filter & Suche in Listen
 - [ ] Push-Benachrichtigungen (z. B. „Plakat als verloren gemeldet")
 - [ ] Rollenbasierter Zugang (Kampagnenleitung vs. Feldteam)
