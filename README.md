@@ -114,9 +114,9 @@ Das Projekt legt besonderen Wert auf:
 
 ### 📤 Export-System
 
-- **PDF-Export:** saubere Tabelle mit Adresse, GPS, Zeit, Status, Kommentar, Foto-Indikator
-- **CSV/Excel-Export:** Semikolon-getrennt, deutsches Dezimalformat, direkt in Excel öffenbar
-- **Smarte Share-Logik:** 1 Format → nativer Share-Dialog (WhatsApp sichtbar); beide Formate → direkt MailComposer mit Anhängen
+- **PDF-Export:** strukturierter Bericht aller Plakat-Einträge, direkt teilbar
+- **CSV/Excel-Export:** tabellarische Ausgabe, kompatibel mit gängigen Office-Anwendungen
+- **Plattformintegrierte Weitergabe:** kontextabhängige Share-Logik je nach Exportauswahl
 
 ### 💾 Offline & Persistenz
 
@@ -212,23 +212,20 @@ QR-Code mit **Expo Go** scannen. Bei Netzwerkproblemen: `--tunnel` ergänzen.
 - [ ] Firebase Storage für Foto-Uploads
 
 ### 🚀 v2.0 — Erweiterte Features *(geplant)*
-- [ ] **Navigationsroute zum Abhängen** — optimierte Fahrroute durch alle Plakatstandorte als Wegpunkte, sodass Teams die Strecke nur noch abfahren müssen
-- [ ] In-App Kartenübersicht mit allen Plakat-Pins auf einen Blick
-- [ ] Filter & Suche in Listen
-- [ ] Push-Benachrichtigungen (z. B. „Plakat als verloren gemeldet")
+- [ ] Erweiterte Kartenintegration für Feldeinsätze
 - [ ] Rollenbasierter Zugang (Kampagnenleitung vs. Feldteam)
-- [ ] Analyse-Dashboard (Abdeckung, Verlustquote nach Bezirk)
+- [ ] Analyse-Dashboard für Kampagnenauswertung
+- [ ] Push-Benachrichtigungen bei Statusänderungen
 
 ---
 
 ## <a id="was-dieses-projekt-zeigt"></a>🎯 Was dieses Projekt zeigt
 
-- Custom-Hooks-Architektur mit klarer Single-Responsibility-Trennung
-- Offline-First-Entwicklung mit AsyncStorage und Firebase-Migrations-Pfad
-- UX-optimierter Kamera-GPS-Flow mit paralleler Ausführung und Fehlertoleranz
-- Smarte Export-Logik mit kontextabhängigem Share-Verhalten (1 vs. 2 Formate)
-- Produktreife App mit realem Stakeholder und konkreter Vermarktungsperspektive
-- Vollständige React-Native-Entwicklung ohne Drittanbieter-UI-Framework
+- Vollständige Cross-Platform-App-Entwicklung mit React Native & Expo — ohne Drittanbieter-UI-Framework
+- Custom-Hooks-Architektur mit klarer Trennung von UI, Logik und Datenhaltung
+- Offline-First-Entwicklung mit sauberem Migrations-Pfad in die Cloud
+- Umgang mit nativen Device-APIs: Kamera, GPS, Dateisystem, plattformspezifisches Sharing
+- Eigenständig entwickelt — von der Idee bis zum produktreifen Einsatz mit realem Stakeholder
 
 ---
 
