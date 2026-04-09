@@ -49,6 +49,8 @@ Offline-fähige Feldapp für Wahlkampfteams · *React Native · Expo · Firebase
   </tr>
 </table>
 
+![WahlPLakatFinder_Liste](https://github.com/user-attachments/assets/a2292185-534e-41f6-a2c6-a8667c8e2504)
+
 ---
 
 ## <a id="überblick"></a>📖 Überblick
