@@ -1,168 +1,239 @@
-# 📍 WahlplakatFinder
+# 📍 WahlplakatFinder – Mobile Plakat-Dokumentation
 
-> A field-ready mobile app for documenting and managing election poster placements — built with React Native & Expo.
+Offline-fähige Feldapp für Wahlkampfteams · *React Native · Expo · Firebase · GPS · PDF/CSV-Export*
 
-![Platform](https://img.shields.io/badge/platform-iOS%20%7C%20Android-lightgrey?style=flat-square&logo=apple&logoColor=white)
-![Built with Expo](https://img.shields.io/badge/Expo%20SDK%2054-000020?style=flat-square&logo=expo&logoColor=white)
-![React Native](https://img.shields.io/badge/React%20Native%200.81-20232A?style=flat-square&logo=react&logoColor=61DAFB)
-![JavaScript](https://img.shields.io/badge/JavaScript-ES2024-F7DF1E?style=flat-square&logo=javascript&logoColor=black)
-![Firebase](https://img.shields.io/badge/Firebase-ready-DD2C00?style=flat-square&logo=firebase&logoColor=FFCA28)
-![Status](https://img.shields.io/badge/status-active%20development-brightgreen?style=flat-square)
-
----
-
-## 📸 Screenshots
-
-> _Screenshots follow shortly._
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" width="40" title="React Native" />&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/javascript/javascript-original.svg" width="40" title="JavaScript" />&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/firebase/firebase-plain.svg" width="40" title="Firebase" />&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" width="40" title="Git" />&nbsp;
+<img src="https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" width="40" title="Node.js" />&nbsp;
 
 ---
 
-## 🧭 About
+## 📋 Inhaltsverzeichnis
 
-**WahlplakatFinder** is a cross-platform mobile application designed for campaign teams to efficiently record, track, and report the status of election posters in the field. Instead of paper lists or fragmented WhatsApp messages, teams get a structured, exportable overview — right from their pocket.
-
-The app works **fully offline** and is ready to scale to cloud-backed team synchronization.
-
----
-
-## ✨ Features
-
-| Feature | Description |
-|---|---|
-| 📷 **One-tap capture** | Opens the camera immediately; GPS is fetched in parallel — no freezing, no waiting |
-| 📍 **GPS + Reverse Geocoding** | Automatically resolves coordinates to a human-readable address |
-| 🟢🔴 **Status tracking** | Mark each poster as **OK** or **Lost** with a single tap |
-| 💬 **Comments** | Add free-text notes to any entry |
-| 📄 **PDF Export** | Generates a clean, branded table ready to share via Mail or WhatsApp |
-| 📊 **CSV / Excel Export** | Semicolon-separated, locale-aware (German decimal format) — opens directly in Excel |
-| 📧 **Smart Share logic** | Single format → native share sheet; both formats → directly opens Mail with attachments |
-| 💾 **Offline-first** | All data persists locally via AsyncStorage — no internet required |
-| ☁️ **Firebase-ready** | Architecture supports seamless switch to Firestore cloud sync |
+- [Überblick](#überblick)
+- [Screenshots](#screenshots)
+- [App-Fluss im Detail](#app-fluss-im-detail)
+- [Kernfunktionen](#kernfunktionen)
+- [Technische Architektur](#technische-architektur)
+- [Tech Stack](#tech-stack)
+- [Setup](#setup)
+- [Roadmap](#roadmap)
+- [Was dieses Projekt zeigt](#was-dieses-projekt-zeigt)
+- [Autor](#autor)
 
 ---
 
-## 🏗️ Architecture
+## <a id="screenshots"></a>📸 Screenshots
 
-The project follows a clean separation of concerns with a **custom hooks pattern**:
+<table>
+  <tr>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/2d7ee158-071e-40b5-9471-65a745e362f1"
+           width="300" alt="Eintrags-Liste" /><br/>
+      <sub><b>Erfasste Plakate mit Status-Anzeige</b></sub>
+    </td>
+    <td align="center" width="50%">
+      <img src="https://github.com/user-attachments/assets/d4593989-a24f-4480-ab56-8728c9ae0ce8"
+           width="300" alt="Export-Dialog" /><br/>
+      <sub><b>Export-Auswahl (PDF &amp; Excel)</b></sub>
+    </td>
+  </tr>
+  <tr>
+    <td align="center" colspan="2">
+      <img src="https://github.com/user-attachments/assets/77a8fba6-8614-4b1c-bd38-3e2f31349c42"
+           width="620" alt="Exportierte Liste" /><br/>
+      <sub><b>Exportierte Plakat-Liste als PDF</b></sub>
+    </td>
+  </tr>
+</table>
+
+---
+
+## <a id="überblick"></a>📖 Überblick
+
+**WahlplakatFinder** ist eine cross-platform Mobile-App, die Wahlkampfteams ermöglicht, aufgehängte Wahlplakate strukturiert zu erfassen, ihren Status zu verfolgen und als Bericht weiterzuleiten — direkt aus dem Feld.
+
+Statt Papierlisten oder Sammel-WhatsApp-Nachrichten entsteht eine saubere, exportierbare Übersicht in Sekunden:
+
+```
+Kamera öffnen → Foto machen → GPS + Adresse automatisch → Liste wächst
+```
+
+Das Projekt legt besonderen Wert auf:
+
+- Sofortige Nutzbarkeit ohne Internetverbindung (Offline-First)
+- Reibungslosen Kamera-GPS-Flow ohne Einfrieren oder Wartezeit
+- Saubere Datenexporte direkt per Mail oder WhatsApp
+- Erweiterbare Cloud-Architektur für zukünftigen Teamzugang
+
+**Zielbereich:** Wahlkampforganisationen, Partei-Ortsverbände, Kampagnenteams jeder Größe.
+
+---
+
+## <a id="app-fluss-im-detail"></a>🔄 App-Fluss im Detail
+
+### 📋 Seite der Wahlkampfleitung
+
+**1️⃣ Liste anlegen** — Name vergeben, los geht's
+
+**2️⃣ Plakate erfassen** — Ein Tap öffnet die Kamera; GPS läuft im Hintergrund
+
+**3️⃣ Status pflegen** — Jedes Plakat als OK oder Verloren markieren, Kommentar hinzufügen
+
+**4️⃣ Bericht versenden** — PDF oder Excel generieren und per Mail / WhatsApp teilen
+
+---
+
+### 🗳 Seite der Feldeinsatz-Teams
+
+**1️⃣ App starten** — Keine Registrierung, keine Anmeldung nötig
+
+**2️⃣ Foto machen** — Kamera öffnet sich sofort, Adresse wird automatisch erkannt
+
+**3️⃣ Liste prüfen** — Plakatstatus auf einen Blick, Kommentare ergänzen
+
+**4️⃣ Senden** — Fertige Liste direkt per Knopfdruck verschicken
+
+---
+
+## <a id="kernfunktionen"></a>✨ Kernfunktionen
+
+### 📷 Kamera & GPS
+
+- Kamera startet sofort beim Tap — kein Einfrieren, kein Warten
+- GPS wird parallel im Hintergrund geladen
+- Automatische Reverse-Geocodierung: Koordinaten → lesbare Adresse
+- Eintrag ohne Foto möglich (Rückfrage bei Kamera-Abbruch)
+- GPS-Timeout mit Retry-Logik und Fallback auf Koordinaten
+
+### 🟢🔴 Status & Kommentare
+
+- Ein-Tap-Status-Toggle: **OK** oder **Verloren**
+- Freitext-Kommentar pro Eintrag
+- Nummerierte Liste für schnelle Übersicht im Feld
+
+### 📤 Export-System
+
+- **PDF-Export:** saubere Tabelle mit Adresse, GPS, Zeit, Status, Kommentar, Foto-Indikator
+- **CSV/Excel-Export:** Semikolon-getrennt, deutsches Dezimalformat, direkt in Excel öffenbar
+- **Smarte Share-Logik:** 1 Format → nativer Share-Dialog (WhatsApp sichtbar); beide Formate → direkt MailComposer mit Anhängen
+
+### 💾 Offline & Persistenz
+
+- Alle Daten lokal via AsyncStorage — komplett ohne Internet nutzbar
+- Daten bleiben nach App-Neustart erhalten
+- Firebase-Architektur vorhanden — Cloud-Sync per Schalter aktivierbar
+
+---
+
+## <a id="technische-architektur"></a>🧠 Technische Architektur
+
+WahlplakatFinder ist nach dem Custom-Hooks-Pattern aufgebaut mit klarer Trennung zwischen UI, Logik und Datenhaltung.
+
+```
+Screens (UI)  →  Custom Hooks (Logik)  →  AsyncStorage / Firebase
+```
 
 ```
 src/
-├── components/       # Pure UI components (ItemCard, Header, Modals)
-├── hooks/            # Business logic
-│   ├── useStorage    # AsyncStorage persistence layer
-│   ├── useCapture    # Camera + GPS + Geocoding workflow
-│   └── useExport     # PDF & CSV generation + smart sharing
-├── screens/          # Screen-level layout (Main, Settings)
-├── services/         # Firebase configuration (cloud-sync ready)
-└── utils/            # Formatters, CSV helpers, navigation
+├── components/     # Reine UI-Komponenten (ItemCard, Header, Modals)
+├── hooks/          # Gesamte Business-Logik
+│   ├── useStorage  # Persistenz-Layer (AsyncStorage)
+│   ├── useCapture  # Kamera + GPS + Geocoding-Workflow
+│   └── useExport   # PDF & CSV-Generierung + Smart-Sharing
+├── screens/        # Screen-Layout (Main, Settings)
+├── services/       # Firebase-Konfiguration (Cloud-Sync ready)
+└── utils/          # Formatter, CSV-Helfer, Navigation
 ```
 
-**Key architectural decisions:**
-- **Offline-First by default** — the app is fully functional without network access
-- **Hooks over classes** — all side effects (storage, device APIs, exports) live in dedicated custom hooks, keeping screens lean and testable
-- **Parallel execution** — camera and GPS permissions are handled in a UX-optimized sequence (camera first, GPS in background) to eliminate perceived wait times
-- **Graceful degradation** — GPS timeout with retry, geocoding fallback to raw coordinates, entry without photo possible
+**Architekturprinzipien:**
+
+- Hooks over Classes — alle Seiteneffekte in dedizierten Hooks, Screens bleiben schlank
+- Offline-First by Default — App funktioniert vollständig ohne Netz
+- Parallele Ausführung — Kamera und GPS laufen entkoppelt, keine UX-Blockade
+- Graceful Degradation — GPS-Timeout, Geocoding-Fallback, Speichern ohne Foto
 
 ---
 
-## 🛠️ Tech Stack
+## <a id="tech-stack"></a>🛠 Tech Stack
 
-<p align="left">
-  <img src="https://skillicons.dev/icons?i=react,js,firebase,git,nodejs" />
-</p>
-
-| Package | Purpose |
-|---|---|
-| `expo-location` | GPS acquisition + reverse geocoding |
-| `expo-image-picker` + `expo-file-system` | Camera capture & persistent local photo storage |
-| `expo-print` | HTML-to-PDF rendering on-device |
-| `expo-sharing` + `expo-mail-composer` | Cross-platform export & smart share logic |
-| `@react-native-async-storage/async-storage` | Offline-first data persistence |
-| `firebase` v12 | Firestore cloud sync (architecture ready, switchable) |
-| `@expo/vector-icons` | Ionicons icon set |
+| Bereich        | Technologie                                              |
+|----------------|----------------------------------------------------------|
+| Framework      | React Native 0.81, Expo SDK 54                           |
+| Sprache        | JavaScript (ES2024)                                      |
+| Persistenz     | AsyncStorage (offline), Firebase Firestore (cloud-ready) |
+| Kamera & GPS   | expo-image-picker, expo-location                         |
+| Export         | expo-print, expo-file-system, expo-sharing               |
+| Mail           | expo-mail-composer                                       |
+| Icons          | @expo/vector-icons (Ionicons)                            |
+| Cloud          | Firebase v12 (Firestore + Storage, architekturbereit)    |
+| Versionierung  | Git                                                      |
 
 ---
 
-## 🗺️ Roadmap
+## <a id="setup"></a>⚙️ Setup
 
-### ✅ v1.0 — MVP (current)
-- [x] Offline-first data capture (photo + GPS + address)
-- [x] Status management (OK / Lost)
-- [x] Comment system
-- [x] PDF & CSV export with smart sharing
-- [x] Persistent local storage
-- [x] Clean, field-usable UI
-
-### 🔄 v1.5 — Cloud Sync & Teams *(in progress)*
-- [ ] Firebase Firestore real-time sync
-- [ ] Multi-user / multi-device support
-- [ ] Shared campaign lists
-- [ ] Firebase Storage for photo uploads
-
-### 🚀 v2.0 — Advanced Features *(planned)*
-- [ ] Map view with poster pins
-- [ ] Filter & search within lists
-- [ ] Push notifications (e.g. "poster reported lost")
-- [ ] Role-based access (campaign manager vs. field worker)
-- [ ] Analytics dashboard (coverage, loss rate by district)
-
----
-
-## ⚙️ Setup
-
-> **Note:** This project requires your own Firebase project. A `.env.example` is provided.
+> **Hinweis:** Das Projekt setzt ein eigenes Firebase-Projekt voraus. Eine `.env.example` liegt bei.
 
 ```bash
-# Install dependencies
+# Abhängigkeiten installieren
 npm install
 
-# Create your environment file
+# Umgebungsdatei anlegen
 cp .env.example .env
-# → Fill in your Firebase config in .env
+# → Firebase-Konfiguration in .env eintragen
 
-# Deploy Firestore security rules
+# Firestore Security Rules deployen
 firebase deploy --project <your-project-id> --only firestore:rules
 
-# Start the development server
+# Entwicklungsserver starten
 npx expo start --clear
 ```
 
-Scan the QR code with **Expo Go** on your device, or use `--tunnel` if on a restricted network.
+QR-Code mit **Expo Go** scannen. Bei Netzwerkproblemen: `--tunnel` ergänzen.
 
 ---
 
-## 📁 Export Format
+## <a id="roadmap"></a>🗺 Roadmap
 
-### PDF
-A formatted table including: entry number, address, GPS coordinates, timestamp, status, comment, photo indicator.
+### ✅ v1.0 — MVP (aktuell)
+- [x] Offline-First Erfassung (Foto + GPS + Adresse)
+- [x] Status-Verwaltung (OK / Verloren)
+- [x] Kommentar-System
+- [x] PDF & CSV-Export mit Smart-Sharing
+- [x] Persistente lokale Datenspeicherung
+- [x] Sauberes, feldtaugliches UI
 
-### CSV (Excel-compatible)
-```
-Nr;Zeit;Adresse;Status;Kommentar;Lat;Lng;Foto
-1;22.03.2026 18:05;Musterstraße 12, Berlin;OK;Gut sichtbar;52,52000;13,40500;...
-```
+### 🔄 v1.5 — Cloud-Sync & Teams *(in Entwicklung)*
+- [ ] Firebase Firestore Echtzeit-Synchronisation
+- [ ] Multi-User / Multi-Gerät-Unterstützung
+- [ ] Geteilte Kampagnenlisten
+- [ ] Firebase Storage für Foto-Uploads
 
----
-
-## 🔐 Environment Variables
-
-```env
-FIREBASE_API_KEY=
-FIREBASE_AUTH_DOMAIN=
-FIREBASE_PROJECT_ID=
-FIREBASE_STORAGE_BUCKET=
-FIREBASE_MESSAGING_SENDER_ID=
-FIREBASE_APP_ID=
-```
-
----
-
-## 👤 Author
-
-Developed independently as a field-tested solution for a real campaign use case — including active stakeholder involvement during development.
+### 🚀 v2.0 — Erweiterte Features *(geplant)*
+- [ ] Kartenansicht mit Plakat-Pins
+- [ ] Filter & Suche in Listen
+- [ ] Push-Benachrichtigungen (z. B. „Plakat als verloren gemeldet")
+- [ ] Rollenbasierter Zugang (Kampagnenleitung vs. Feldteam)
+- [ ] Analyse-Dashboard (Abdeckung, Verlustquote nach Bezirk)
 
 ---
 
-## 📄 License
+## <a id="was-dieses-projekt-zeigt"></a>🎯 Was dieses Projekt zeigt
 
-This project is **not open source**. All rights reserved.
+- Custom-Hooks-Architektur mit klarer Single-Responsibility-Trennung
+- Offline-First-Entwicklung mit AsyncStorage und Firebase-Migrations-Pfad
+- UX-optimierter Kamera-GPS-Flow mit paralleler Ausführung und Fehlertoleranz
+- Smarte Export-Logik mit kontextabhängigem Share-Verhalten (1 vs. 2 Formate)
+- Produktreife App mit realem Stakeholder und konkreter Vermarktungsperspektive
+- Vollständige React-Native-Entwicklung ohne Drittanbieter-UI-Framework
+
+---
+
+## <a id="autor"></a>👨‍💻 Autor
+
+Eigenständig entwickelt als praxiserprobte Lösung für einen realen Wahlkampf-Use-Case — mit aktivem Stakeholder-Involvement während der Entwicklung.
+
+GitHub: [github.com/Codenix-1349](https://github.com/Codenix-1349)
